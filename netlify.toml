@@ -1,0 +1,13 @@
+[build]
+  command = "next build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Netlify Functions (used under the hood by the Next.js runtime for /app/api/*)
+# have a default execution limit of 10s (up to 26s on Pro plans with background
+# functions). The Instagram flow is deliberately split into start/status/result
+# calls so no single function ever needs to block on a long-running Apify job.
+[functions]
+  node_bundler = "esbuild"
