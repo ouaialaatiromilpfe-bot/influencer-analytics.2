@@ -5,13 +5,18 @@ export async function POST(request: Request) {
     const { username } = await request.json();
 
     const response = await fetch(
-      `https://instagram-scraper-api2.p.rapidapi.com/v1/info?username_or_id_or_url=${username}`,
+      'https://instagram-scraper-stable-api.p.rapidapi.com/get_ig_user_followers_v2.php',
       {
-        method: 'GET',
+        method: 'POST',
         headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
           'x-rapidapi-key': process.env.RAPIDAPI_KEY || '',
-          'x-rapidapi-host': 'instagram-scraper-api2.p.rapidapi.com',
+          'x-rapidapi-host': 'instagram-scraper-stable-api.p.rapidapi.com',
         },
+        body: new URLSearchParams({
+          username_or_url: username,
+          data: 'info',
+        }),
       }
     );
 
